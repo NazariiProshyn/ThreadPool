@@ -2,13 +2,14 @@
 
 #include <vector>
 #include <queue>
-
 #include <functional> //bind
 #include <mutex>
 #include <condition_variable>
 #include <type_traits> //invoke_result
 #include <thread>
 #include <future> //packaged_task
+
+#include "ThreadQueue.h"
 
 class ThreadPool
 {
@@ -21,7 +22,9 @@ public:
 	ThreadPool& operator = (const ThreadPool&) = delete;
 
 private:
-
+	std::vector<std::thread> threads;
+	std::atomic_bool done;
+	ThreadQueue<std::function<void()>> workQueue;
 };
 
 

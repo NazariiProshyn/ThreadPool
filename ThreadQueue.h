@@ -11,8 +11,7 @@ template<typename T>
 class ThreadQueue
 {
 public:
-	ThreadQueue();
-	~ThreadQueue();
+	ThreadQueue(T value);
 	void push(T value);
 	void waitAndPop(T& value);
 	std::shared_ptr<T> waitAndPop();
