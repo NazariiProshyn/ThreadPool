@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/ThreadPoolC17/Main.cpp
+ThreadPoolH.h
+/workspaces/ThreadPoolC17/ThreadPoolH.h
+
+/workspaces/ThreadPoolC17/ThreadPoolH.cpp
+ThreadPoolH.h
+/workspaces/ThreadPoolC17/ThreadPoolH.h
+
+/workspaces/ThreadPoolC17/ThreadPoolH.h
+vector
+-
+queue
+-
+functional
+-
+mutex
+-
+condition_variable
+-
+type_traits
+-
+thread
+-
+future
+-
+
