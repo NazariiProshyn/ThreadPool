@@ -11,13 +11,16 @@ template<typename T>
 class ThreadQueue
 {
 public:
-	ThreadQueue(T value);
+	
+	ThreadQueue() = default;
+	
 	void push(T value);
-	void waitAndPop(T& value);
 	std::shared_ptr<T> waitAndPop();
-	bool tryPop(T& value);
 	std::shared_ptr<T> tryPop();
 	bool empty() const;
+
+	// void waitAndPop(T& value);
+	// bool tryPop(T& value);
 
 private:
 	mutable std::mutex mut;

@@ -2,14 +2,14 @@
 
 #include <vector>
 #include <queue>
-#include <functional> //bind
+#include <functional> 
 #include <mutex>
 #include <condition_variable>
-#include <type_traits> //invoke_result
+#include <type_traits> 
 #include <thread>
-#include <future> //packaged_task
+#include <future> 
 
-#include "ThreadQueue.h"
+#include "threadQueue.h"
 
 class ThreadPool
 {
