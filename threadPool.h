@@ -24,7 +24,7 @@ public:
 private:
 	std::vector<std::thread> threads;
 	std::atomic_bool done;
-	ThreadQueue<std::function<void()>> workQueue;
+	ThreadQueue workQueue;
 };
 
 

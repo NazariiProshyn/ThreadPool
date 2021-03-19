@@ -1,39 +1,39 @@
 #include "threadQueue.h"
 
-template<typename T>
-void ThreadQueue<T>::push(T value)
+
+void ThreadQueue::push(std::function<void()> value)
 {
 	std::lock_guard<std::mutex> lock(mut);
 	dataQueue.push(std::move(value));
 	dataCondition.notify_one();
 }
 
-template<typename T>
-std::shared_ptr<T> ThreadQueue<T>::waitAndPop()
+
+std::shared_ptr<std::function<void()>> ThreadQueue::waitAndPop()
 {
 	std::unique_lock<std::mutex> lock(mut);
 	dataCondition.wait(lock, [this] {return !dataQueue.empty(); });
-	std::shared_ptr<T> res(
-		std::make_shared<T>(std::move(dataQueue.front())));
+	std::shared_ptr<std::function<void()>> res(
+		std::make_shared<std::function<void()>>(std::move(dataQueue.front())));
 	dataQueue.pop();
 	return res;
 }
 
-template<typename T>
-std::shared_ptr<T> ThreadQueue<T>::tryPop()
+
+std::shared_ptr<std::function<void()>> ThreadQueue::tryPop()
 {
 	std::lock_guard<std::mutex> lock(mut);
 	if (dataQueue.empty()) {
-		return std::shared_ptr<T>();
+		return std::shared_ptr<std::function<void()>>();
 	}
-	std::shared_ptr<T> res(
-		std::make_shared<T>(std::move(dataQueue.front())));
+	std::shared_ptr<std::function<void()>> res(
+		std::make_shared<std::function<void()>>(std::move(dataQueue.front())));
 	dataQueue.pop();
 	return res;
 }
 
-template<typename T>
-bool ThreadQueue<T>::empty() const
+
+bool ThreadQueue::empty() const
 {
 	std::lock_guard<std::mutex> lock(mut);
 	return dataQueue.empty();

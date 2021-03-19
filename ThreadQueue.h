@@ -6,17 +6,17 @@
 #include <condition_variable>
 #include <queue>
 #include <utility>
+#include <functional>
 
-template<typename T>
 class ThreadQueue
 {
 public:
 	
 	ThreadQueue() = default;
 	
-	void push(T value);
-	std::shared_ptr<T> waitAndPop();
-	std::shared_ptr<T> tryPop();
+	void push(std::function<void()> value);
+	std::shared_ptr<std::function<void()>> waitAndPop();
+	std::shared_ptr<std::function<void()>> tryPop();
 	bool empty() const;
 
 	// void waitAndPop(T& value);
@@ -24,6 +24,7 @@ public:
 
 private:
 	mutable std::mutex mut;
-	std::queue<T> dataQueue;
+	std::queue<std::function<void()>> dataQueue;
 	std::condition_variable dataCondition;
 };
+
