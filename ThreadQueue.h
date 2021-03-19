@@ -27,4 +27,3 @@ private:
 	std::queue<T> dataQueue;
 	std::condition_variable dataCondition;
 };
-
