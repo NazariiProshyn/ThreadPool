@@ -1,3 +1,15 @@
+//	$Header$
+
+//	********************************************************
+//	File Name:			threadQueue.h        
+//	Date:               3/19/2021
+//	Author:             Proshyn Nazarii
+//	Description:        thread-safe structure <queue> with 
+//                      the ability to simultaneously write
+//                      from multiple threads
+//	********************************************************
+
+
 #pragma once
 
 #include <mutex>
