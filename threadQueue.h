@@ -25,18 +25,32 @@ class ThreadQueue
 public:
 	
 	ThreadQueue() = default;
-	
+
+    //! \brief                 Inserts a new element at the end of the queue
+    //! \param [in] value      New item for push 
+    //! \return 
 	void push(std::function<void()> value);
-	std::shared_ptr<std::function<void()>> waitAndPop();
+
+    //! \brief                 Removes the next element in the queue after checking for items     
+    //! \return                Shares pointer to the beginning of the queue
 	std::shared_ptr<std::function<void()>> tryPop();
+
+    //! \brief                 Check queue for items     
+    //! \return                Result of checking (true if number of items>0)
 	bool empty() const;
 
-	// void waitAndPop(T& value);
-	// bool tryPop(T& value);
+
 
 private:
+	//Allows you to work with the 
+	//queue in multithreaded mode safely
 	mutable std::mutex mut;
+
+	//Contains items about functions that 
+	//are in runtime and that will be executed
 	std::queue<std::function<void()>> dataQueue;
+
+	
 	std::condition_variable dataCondition;
 };
 
