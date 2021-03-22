@@ -20,6 +20,7 @@
 #include <future> 
 
 #include "threadQueue.h"
+#include "joinThread.h"
 
 class ThreadPool
 {
@@ -28,13 +29,15 @@ public:
 	~ThreadPool();
 
 	//thread not copiable
-	ThreadPool (const ThreadPool&) = delete;
+	ThreadPool(const ThreadPool&) = delete;
 	ThreadPool& operator = (const ThreadPool&) = delete;
+	void submit(std::function<void()> funct);
 
 private:
 	std::vector<std::thread> threads;
 	std::atomic_bool done;
 	ThreadQueue workQueue;
+	JoinThread joiner;
 };
 
 

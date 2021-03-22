@@ -34,7 +34,7 @@ public:
     //! \brief                 Removes the next element in the queue after    
 	//!                        checking for items
     //! \return                Shares pointer to the beginning of the queue
-	std::shared_ptr<std::function<void()>> tryPop();
+	std::shared_ptr<std::function<void()>> Pop();
 
     //! \brief                 Check queue for items     
     //! \return                Result of checking (true if number of items>0)
@@ -50,7 +50,6 @@ private:
 	//Contains items about functions that 
 	//are in runtime and that will be executed
 	std::queue<std::function<void()>> dataQueue;
-
 
 	std::condition_variable dataCondition;
 };
