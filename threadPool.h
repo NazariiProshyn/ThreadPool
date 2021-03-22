@@ -32,19 +32,26 @@ public:
 
 	~ThreadPool();
 
-	//thread not copiable
+	//Thread not copiable
 	ThreadPool(const ThreadPool&) = delete;
 	ThreadPool& operator = (const ThreadPool&) = delete;
 
 	//! \brief                 Add function to the queue for execution
-	//! \param [in] funct      function performed in the thread 
+	//! \param [in] funct      Function performed in the thread 
 	//! \return                   
 	void submit(std::function<void()> funct);
 
 private:
+	//Vector of working threads
 	std::vector<std::thread> threads;
+
+	//Indicates the possibility threads to work
 	std::atomic_bool done;
+
+	//Queue of functions to be performed
 	ThreadQueue workQueue;
+
+	//Ensures the connection of all threads
 	JoinThread joiner;
 
 	void workThread();

@@ -20,6 +20,9 @@ public:
 	explicit JoinThread(std::vector<std::thread>& thread) :
 		threads(thread)
 	{};
+
+	//! \brief                Ensures the connection of all threads
+	//! \return 
 	~JoinThread();
 
 private:
