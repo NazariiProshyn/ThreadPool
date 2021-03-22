@@ -36,6 +36,9 @@ public:
 	//! \return                Shares pointer to the beginning of the queue
 	std::shared_ptr<std::function<void()>> Pop();
 
+	//! \brief                     Assigns first element of queue to the variable
+	//! \param [in,out] value      function performed in the thread 
+	//! \return                    returns result of deleting first element
 	bool Pop(std::function<void()>& value);
 
 	//! \brief                 Check queue for items     

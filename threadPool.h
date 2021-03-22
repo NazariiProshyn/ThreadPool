@@ -25,12 +25,20 @@
 class ThreadPool
 {
 public:
+	//! \brief       Determines the possible number 
+	//!              of threads and creates them
+	//! \return 
 	ThreadPool();
+
 	~ThreadPool();
 
 	//thread not copiable
 	ThreadPool(const ThreadPool&) = delete;
 	ThreadPool& operator = (const ThreadPool&) = delete;
+
+	//! \brief                 Add function to the queue for execution
+	//! \param [in] funct      function performed in the thread 
+	//! \return                   
 	void submit(std::function<void()> funct);
 
 private:
