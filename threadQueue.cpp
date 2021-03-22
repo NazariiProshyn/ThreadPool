@@ -20,6 +20,20 @@ std::shared_ptr<std::function<void()>> ThreadQueue::Pop()
 	return res;
 }
 
+bool ThreadQueue::Pop(std::function<void()>& value)
+{
+	std::lock_guard<std::mutex> lock(mut);
+	if (dataQueue.empty()) {
+		return false;
+	}
+	value = std::move(dataQueue.front());
+	dataQueue.pop();
+	return true;
+}
+
+
+
+
 bool ThreadQueue::empty() const
 {
 	std::lock_guard<std::mutex> lock(mut);

@@ -25,7 +25,7 @@
 class ThreadPool
 {
 public:
-	ThreadPool(size_t NumOfThreads);
+	ThreadPool();
 	~ThreadPool();
 
 	//thread not copiable
@@ -38,6 +38,8 @@ private:
 	std::atomic_bool done;
 	ThreadQueue workQueue;
 	JoinThread joiner;
+
+	void workThread();
 };
 
 

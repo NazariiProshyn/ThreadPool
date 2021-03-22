@@ -23,21 +23,23 @@
 class ThreadQueue
 {
 public:
-	
+
 	ThreadQueue() = default;
 
-    //! \brief                 Inserts a new element at the end of the queue
-    //! \param [in] value      New item for push 
-    //! \return 
+	//! \brief                 Inserts a new element at the end of the queue
+	//! \param [in] value      New item for push 
+	//! \return 
 	void push(std::function<void()> value);
 
-    //! \brief                 Removes the next element in the queue after    
+	//! \brief                 Removes the next element in the queue after    
 	//!                        checking for items
-    //! \return                Shares pointer to the beginning of the queue
+	//! \return                Shares pointer to the beginning of the queue
 	std::shared_ptr<std::function<void()>> Pop();
 
-    //! \brief                 Check queue for items     
-    //! \return                Result of checking (true if number of items>0)
+	bool Pop(std::function<void()>& value);
+
+	//! \brief                 Check queue for items     
+	//! \return                Result of checking (true if number of items>0)
 	bool empty() const;
 
 
