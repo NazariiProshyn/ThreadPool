@@ -1,7 +1,7 @@
 #include "threadQueue.h"
 
 
-void ThreadQueue::push(const std::function<void()>& value)
+void ThreadQueue::push(std::function<void()> value)
 {
 	std::lock_guard<std::mutex> lock(mut);
 	dataQueue.push(std::move(value));

@@ -13,10 +13,10 @@ ThreadPool::ThreadPool(const size_t thread_count)
 				std::thread(&ThreadPool::workThread, this));
 		}
 	}
-	catch (const std::exception& e)
+	catch (const std::exception& ex)
 	{
 		run = false;
-		std::cout << e.what() << std::endl;
+		std::cout << ex.what() << std::endl;
 		throw;
 	}
 }

@@ -24,7 +24,7 @@ public:
 	//!						   blocks access to the queue
 	//! \param [in] value      New item for push 
 	//! \return 
-	void push(const std::function<void()>& value);
+	void push(std::function<void()> value);
 
 	//! \brief                     Assigns first element of queue to the variable
 	//!                            blocks access to the queue
@@ -32,7 +32,7 @@ public:
 	//! \return                    returns result of deleting first element
 	std::function<void()> pop();
 
-	size_t size() { return dataQueue.size(); }
+	size_t size() const { return dataQueue.size(); }
 
 
 private:
