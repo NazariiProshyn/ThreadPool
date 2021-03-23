@@ -20,7 +20,7 @@ int main()
     for (size_t i = 0; i < 3; ++i)
     {
         threadpool.submit(foo1);
-        threadpool.submit(foo3);
+        threadpool.submit(foo2);
         threadpool.submit(foo3);
     }
 

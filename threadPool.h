@@ -28,8 +28,8 @@ public:
 	ThreadPool(const ThreadPool&) = delete;
 	ThreadPool& operator=(const ThreadPool&) = delete;
 
-	//! \brief                 Add function to the queue for execution
-	//! \param [in] funct      Function performed in the thread 
+	//! \brief                 Add function to the execution queue  
+	//! \param [in] funct      Function that is added to the execution queue
 	//! \return                   
 	void submit(const std::function<void()> funct);
 

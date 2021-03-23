@@ -21,15 +21,14 @@ public:
 	ThreadQueue() = default;
 
 	//! \brief                 Inserts a new element at the end of the queue
-	//!						   blocks access to the queue
+	//!                        use std::mutex for locking queue
 	//! \param [in] value      New item for push 
 	//! \return 
 	void push(std::function<void()> value);
 
-	//! \brief                     Assigns first element of queue to the variable
-	//!                            blocks access to the queue
-	//! \param [in,out] value      function performed in the thread 
-	//! \return                    returns result of deleting first element
+	//! \brief                     Delete first element in the queue 
+	//!                            use std::mutex for locking queue
+	//! \return                    First function in the queue
 	std::function<void()> pop();
 
 	size_t size() const { return dataQueue.size(); }
