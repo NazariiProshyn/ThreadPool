@@ -1,14 +1,12 @@
 #include "threadPool.h"
 
 
-ThreadPool::ThreadPool():
-	done(false), joiner(threads)
+ThreadPool::ThreadPool(size_t thread_count)
 {
-	unsigned const thread_count =
-		std::thread::hardware_concurrency();
-	try 
+	threads.reserve(thread_count);
+	try
 	{
-		for (unsigned i = 0; i < thread_count; i++)
+		for (size_t i = 0; i < thread_count; i++)
 		{
 			threads.push_back(
 				std::thread(&ThreadPool::workThread, this));
@@ -16,14 +14,21 @@ ThreadPool::ThreadPool():
 	}
 	catch (...)
 	{
-		done = true;
+		run = true;
 		throw;
 	}
 }
 
 ThreadPool::~ThreadPool()
 {
-	done = true;
+	run = true;
+	for (size_t i = 0; i < threads.size(); ++i)
+	{
+		if (threads[i].joinable())
+		{
+			threads[i].join();
+		}
+	}
 }
 
 void ThreadPool::submit(std::function<void()> funct)
@@ -33,16 +38,9 @@ void ThreadPool::submit(std::function<void()> funct)
 
 void ThreadPool::workThread()
 {
-	while (!done)
+	while (!run)
 	{
-		std::function<void()> task;
-		if (workQueue.Pop(task))
-		{
-			task();
-		}
-		else
-		{
-			std::this_thread::yield();
-		}
+		std::function<void()> task = workQueue.pop();
+		task();
 	}
 }

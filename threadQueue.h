@@ -1,3 +1,4 @@
+#pragma once
 //	$Header$
 
 //	********************************************************
@@ -9,15 +10,10 @@
 //                      from multiple threads
 //	********************************************************
 
-
-#pragma once
-
 #include <mutex>
 #include <memory>
-#include <thread>
 #include <condition_variable>
 #include <queue>
-#include <utility>
 #include <functional>
 
 class ThreadQueue
@@ -31,15 +27,10 @@ public:
 	//! \return 
 	void push(std::function<void()> value);
 
-	//! \brief                 Removes the next element in the queue after    
-	//!                        checking for items
-	//! \return                Shares pointer to the beginning of the queue
-	std::shared_ptr<std::function<void()>> Pop();
-
 	//! \brief                     Assigns first element of queue to the variable
 	//! \param [in,out] value      function performed in the thread 
 	//! \return                    returns result of deleting first element
-	bool Pop(std::function<void()>& value);
+	std::function<void()> pop();
 
 	//! \brief                 Check queue for items     
 	//! \return                Result of checking (true if number of items>0)

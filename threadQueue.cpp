@@ -8,27 +8,15 @@ void ThreadQueue::push(std::function<void()> value)
 	dataCondition.notify_one();
 }
 
-std::shared_ptr<std::function<void()>> ThreadQueue::Pop()
-{
-	std::lock_guard<std::mutex> lock(mut);
-	if (dataQueue.empty()) {
-		return std::shared_ptr<std::function<void()>>();
-	}
-	std::shared_ptr<std::function<void()>> res(
-		std::make_shared<std::function<void()>>(std::move(dataQueue.front())));
-	dataQueue.pop();
-	return res;
-}
 
-bool ThreadQueue::Pop(std::function<void()>& value)
+std::function<void()> ThreadQueue::pop()
 {
-	std::lock_guard<std::mutex> lock(mut);
-	if (dataQueue.empty()) {
-		return false;
-	}
-	value = std::move(dataQueue.front());
+	std::unique_lock<std::mutex> lock(mut);
+	dataCondition.wait(lock, [this] {return !dataQueue.empty(); });
+
+	std::function<void()> value = std::move(dataQueue.front());
 	dataQueue.pop();
-	return true;
+	return value;
 }
 
 

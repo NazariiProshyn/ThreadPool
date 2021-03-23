@@ -1,3 +1,4 @@
+#pragma once
 //	$Header$
 
 //	********************************************************
@@ -7,8 +8,6 @@
 //	Description:        simple example of Thread Pool
 //	********************************************************
 
-
-#pragma once
 
 #include <vector>
 #include <queue>
@@ -20,7 +19,6 @@
 #include <future> 
 
 #include "threadQueue.h"
-#include "joinThread.h"
 
 class ThreadPool
 {
@@ -28,7 +26,7 @@ public:
 	//! \brief       Determines the possible number 
 	//!              of threads and creates them
 	//! \return 
-	ThreadPool();
+	ThreadPool(size_t thread_count);
 
 	~ThreadPool();
 
@@ -46,13 +44,10 @@ private:
 	std::vector<std::thread> threads;
 
 	//Indicates the possibility threads to work
-	std::atomic_bool done;
+	std::atomic_bool run = false;
 
 	//Queue of functions to be performed
 	ThreadQueue workQueue;
-
-	//Ensures the connection of all threads
-	JoinThread joiner;
 
 	void workThread();
 };
