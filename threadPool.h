@@ -46,7 +46,7 @@ private:
 	//Indicates the possibility threads to work
 	std::atomic_bool run = false;
 
-	//Queue of functions to be performed
+	//Synchronized access to the task queue
 	ThreadQueue workQueue;
 
 	void workThread();

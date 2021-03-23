@@ -23,16 +23,19 @@ public:
 	ThreadQueue() = default;
 
 	//! \brief                 Inserts a new element at the end of the queue
+	//!						   blocks access to the queue
 	//! \param [in] value      New item for push 
 	//! \return 
 	void push(std::function<void()> value);
 
 	//! \brief                     Assigns first element of queue to the variable
+	//!                            blocks access to the queue
 	//! \param [in,out] value      function performed in the thread 
 	//! \return                    returns result of deleting first element
 	std::function<void()> pop();
 
 	//! \brief                 Check queue for items     
+	//!                        blocks access to the queue
 	//! \return                Result of checking (true if number of items>0)
 	bool empty() const;
 
@@ -47,6 +50,7 @@ private:
 	//are in runtime and that will be executed
 	std::queue<std::function<void()>> dataQueue;
 
+	//notifies that an item has been added to the queue
 	std::condition_variable dataCondition;
 };
 
