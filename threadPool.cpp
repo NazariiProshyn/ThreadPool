@@ -22,6 +22,7 @@ ThreadPool::ThreadPool(size_t thread_count)
 
 ThreadPool::~ThreadPool()
 {
+	//while (workQueue.size() > 0) {}
 	run = true;
 	for (size_t i = 0; i < threads.size(); ++i)
 	{
