@@ -1,30 +1,51 @@
-#include "threadQueue.h"
+#pragma once
 
+//	********************************************************
+//	File Name:			threadQueue.h        
+//	Date:               3/19/2021
+//	Author:             Proshyn Nazarii
+//	Description:        thread-safe structure <queue> with 
+//                      the ability to simultaneously write
+//                      from multiple threads
+//	********************************************************
 
-void ThreadQueue::push(std::function<void()> value)
+#include <mutex>
+#include <memory>
+#include <condition_variable>
+#include <queue>
+#include <functional>
+
+class ThreadQueue
 {
-	std::lock_guard<std::mutex> lock(mut);
-	dataQueue.push(std::move(value));
-	dataCondition.notify_one();
-}
+public:
+
+	ThreadQueue() = default;
+
+	//! \brief                 Inserts a new element at the end of the queue
+	//!						   blocks access to the queue
+	//! \param [in] value      New item for push 
+	//! \return 
+	void push(const std::function<void()>& value);
+
+	//! \brief                     Assigns first element of queue to the variable
+	//!                            blocks access to the queue
+	//! \param [in,out] value      function performed in the thread 
+	//! \return                    returns result of deleting first element
+	std::function<void()> pop();
+
+	size_t size() { return dataQueue.size(); }
 
 
-std::function<void()> ThreadQueue::pop()
-{
-	std::unique_lock<std::mutex> lock(mut);
-	dataCondition.wait(lock, [this] {return !dataQueue.empty(); });
+private:
+	//Allows you to work with the 
+	//queue in multithreaded mode safely
+	mutable std::mutex mut;
 
-	std::function<void()> value = std::move(dataQueue.front());
-	dataQueue.pop();
-	return value;
-}
+	//Contains items about functions that 
+	//are in runtime and that will be executed
+	std::queue<std::function<void()>> dataQueue;
 
-
-
-
-bool ThreadQueue::empty() const
-{
-	std::lock_guard<std::mutex> lock(mut);
-	return dataQueue.empty();
-}
+	//notifies that an item has been added to the queue
+	std::condition_variable dataCondition;
+};
 

@@ -1,5 +1,4 @@
 #pragma once
-//	$Header$
 
 //	********************************************************
 //	File Name:			threadQueue.h        
@@ -26,7 +25,7 @@ public:
 	//!						   blocks access to the queue
 	//! \param [in] value      New item for push 
 	//! \return 
-	void push(std::function<void()> value);
+	void push(const std::function<void()>& value);
 
 	//! \brief                     Assigns first element of queue to the variable
 	//!                            blocks access to the queue
@@ -34,11 +33,7 @@ public:
 	//! \return                    returns result of deleting first element
 	std::function<void()> pop();
 
-	//! \brief                 Check queue for items     
-	//!                        blocks access to the queue
-	//! \return                Result of checking (true if number of items>0)
-	bool empty() const;
-
+	size_t size() { return dataQueue.size(); }
 
 
 private:

@@ -1,7 +1,7 @@
 #include "threadPool.h"
 
 
-ThreadPool::ThreadPool(size_t thread_count)
+ThreadPool::ThreadPool(const size_t thread_count)
 {
 	threads.reserve(thread_count);
 	try
@@ -22,7 +22,7 @@ ThreadPool::ThreadPool(size_t thread_count)
 
 ThreadPool::~ThreadPool()
 {
-	//while (workQueue.size() > 0) {}
+	while (workQueue.size() > 0) {}
 	run = true;
 	for (size_t i = 0; i < threads.size(); ++i)
 	{
@@ -33,7 +33,7 @@ ThreadPool::~ThreadPool()
 	}
 }
 
-void ThreadPool::submit(std::function<void()> funct)
+void ThreadPool::submit(const std::function<void()> funct)
 {
 	workQueue.push(funct);
 }
