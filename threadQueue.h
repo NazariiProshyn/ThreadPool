@@ -10,7 +10,6 @@
 //	********************************************************
 
 #include <mutex>
-#include <memory>
 #include <condition_variable>
 #include <queue>
 #include <functional>

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "threadPool.h"
 
 
@@ -12,9 +13,9 @@ ThreadPool::ThreadPool(const size_t thread_count)
 				std::thread(&ThreadPool::workThread, this));
 		}
 	}
-	catch (std::exception& e)
+	catch (const std::exception& e)
 	{
-		run = true;
+		run = false;
 		std::cout << e.what() << std::endl;
 		throw;
 	}
@@ -23,7 +24,7 @@ ThreadPool::ThreadPool(const size_t thread_count)
 ThreadPool::~ThreadPool()
 {
 	while (workQueue.size() > 0) {}
-	run = true;
+	run = false;
 	for (size_t i = 0; i < threads.size(); ++i)
 	{
 		if (threads[i].joinable())
@@ -40,7 +41,7 @@ void ThreadPool::submit(const std::function<void()> funct)
 
 void ThreadPool::workThread()
 {
-	while (!run)
+	while (run)
 	{
 		std::function<void()> task = workQueue.pop();
 		task();
