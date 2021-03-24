@@ -1,13 +1,13 @@
 #pragma once
 
-//	********************************************************
-//	File Name:			threadQueue.h        
-//	Date:               3/19/2021
-//	Author:             Proshyn Nazarii
-//	Description:        thread-safe structure <queue> with 
+//  ********************************************************
+//  File Name:			threadQueue.h        
+//  Date:               3/19/2021
+//  Author:             Proshyn Nazarii
+//  Description:        thread-safe structure <queue> with 
 //                      the ability to simultaneously write
 //                      from multiple threads
-//	********************************************************
+//  ********************************************************
 
 #include <mutex>
 #include <condition_variable>
@@ -30,19 +30,23 @@ public:
 	//! \return                First function in the queue
 	std::function<void()> pop();
 
+	//! \brief                 Returns the number of 
+	//!                        elements in the queue. 
+	//! \return                The number of 
+	//!                        elements in the queue.
 	size_t size() const;
 
 
 private:
 	
-	//Sync access to the queue,
-	//prevent data race
+	// Sync access to the queue,
+	// prevent data race
 	mutable std::mutex mut;
 
-	//Queue of functions
+	// Queue of functions
 	std::queue<std::function<void()>> dataQueue;
 
-	//notifies that an item has been added to the queue
+	// Notifies that an item has been added to the queue
 	std::condition_variable condVar;
 };
 
