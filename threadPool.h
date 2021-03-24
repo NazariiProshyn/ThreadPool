@@ -11,8 +11,10 @@
 #include <vector>
 #include <functional> 
 #include <thread>
+#include <queue>
+#include <atomic>
 
-#include "threadQueue.h"
+
 
 class ThreadPool
 {
@@ -41,7 +43,7 @@ private:
 	std::atomic_bool run{true};
 
 	//Synchronized access to the task queue
-	ThreadQueue workQueue;
+	std::queue<std::function<void()>> workQueue;
 
 	void workThread();
 };
