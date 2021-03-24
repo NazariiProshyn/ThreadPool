@@ -44,8 +44,7 @@ void ThreadPool::workThread()
 {
 	while (run)
 	{
-		std::function<void()> task = workQueue.front();
-		workQueue.pop();
+		std::function<void()> task = workQueue.pop();
 		task();
 	}
 }
