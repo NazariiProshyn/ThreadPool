@@ -26,9 +26,9 @@ public:
 	//! \return 
 	void push(std::function<void()> value);
 
-	//! \brief                     Delete first element in the queue 
-	//!                            use std::mutex for locking queue
-	//! \return                    First function in the queue
+	//! \brief                 Delete first element in the queue 
+	//!                        use std::mutex for locking queue
+	//! \return                First function in the queue
 	std::function<void()> pop();
 
 	size_t size() const { return dataQueue.size(); }

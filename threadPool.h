@@ -1,7 +1,7 @@
 #pragma once
 
 //	********************************************************
-//	File Name:			threadPoll.h        
+//	File Name:          threadPoll.h        
 //	Date:               3/19/2021
 //	Author:             Proshyn Nazarii
 //	Description:        simple example of Thread Pool

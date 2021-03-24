@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iterator>
 #include "threadPool.h"
 
 
@@ -25,11 +26,11 @@ ThreadPool::~ThreadPool()
 {
 	while (workQueue.size() > 0) {}
 	run = false;
-	for (size_t i = 0; i < threads.size(); ++i)
+	for (std::vector<std::thread>::iterator iter = threads.begin(); iter < threads.end(); ++iter)
 	{
-		if (threads[i].joinable())
+		if ((*iter).joinable())
 		{
-			threads[i].join();
+			(*iter).join();
 		}
 	}
 }
