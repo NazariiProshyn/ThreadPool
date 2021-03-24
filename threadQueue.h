@@ -21,26 +21,27 @@ public:
 	ThreadQueue() = default;
 
 	//! \brief                 Inserts a new element at the end of the queue
-	//!                        use std::mutex for locking queue
-	//! \param [in] value      New item for push 
+	//!                        sync access to the queue, prevent data race
+	//! \param [in] funct      New item for push 
 	//! \return 
-	void push(std::function<void()> value);
+	void push(std::function<void()> funct);
 
 	//! \brief                 Delete first element in the queue 
-	//!                        use std::mutex for locking queue
+	//!                        sync access to the queue, prevent data race
 	//! \return                First function in the queue
 	std::function<void()> pop();
 
-	size_t size() const { return dataQueue.size(); }
+	size_t size() const;
 
 
 private:
-	//Allows you to work with the 
-	//queue in multithreaded mode safely
+	
+	//Sync access to the queue,
+	//prevent data race
 	mutable std::mutex mut;
 
-	//Contains items about functions that 
-	//are in runtime and that will be executed
+	//Queue of functions wich will be
+	//executed in thread pool
 	std::queue<std::function<void()>> dataQueue;
 
 	//notifies that an item has been added to the queue
