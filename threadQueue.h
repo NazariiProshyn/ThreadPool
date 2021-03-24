@@ -14,11 +14,11 @@
 #include <queue>
 #include <functional>
 
-class ThreadQueue
+class ThreadSafeQueue
 {
 public:
 
-	ThreadQueue() = default;
+	ThreadSafeQueue() = default;
 
 	//! \brief                 Tread safe insert into the queue
 	//! \param [in] funct      New item for push 
@@ -39,11 +39,10 @@ private:
 	//prevent data race
 	mutable std::mutex mut;
 
-	//Queue of functions wich will be
-	//executed in thread pool
+	//Queue of functions
 	std::queue<std::function<void()>> dataQueue;
 
 	//notifies that an item has been added to the queue
-	std::condition_variable dataCondition;
+	std::condition_variable condVar;
 };
 

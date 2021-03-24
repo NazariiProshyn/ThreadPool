@@ -1,7 +1,7 @@
 #include "threadQueue.h"
 
 
-void ThreadQueue::push(std::function<void()> funct)
+void ThreadSafeQueue::push(std::function<void()> funct)
 {
 	std::lock_guard<std::mutex> lock(mut);
 	dataQueue.push(std::move(funct));
@@ -9,7 +9,7 @@ void ThreadQueue::push(std::function<void()> funct)
 }
 
 
-std::function<void()> ThreadQueue::pop()
+std::function<void()> ThreadSafeQueue::pop()
 {
 	std::unique_lock<std::mutex> lock(mut);
 	dataCondition.wait(lock, [this] {return !dataQueue.empty(); });
@@ -20,7 +20,7 @@ std::function<void()> ThreadQueue::pop()
 }
 
 
-size_t ThreadQueue::size() const
+size_t ThreadSafeQueue::size() const
 {
 	std::lock_guard<std::mutex> lock(mut);
 	return dataQueue.size();
