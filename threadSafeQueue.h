@@ -1,7 +1,7 @@
 #pragma once
 
 //  ********************************************************
-//  File Name:			threadQueue.h        
+//  File Name:          threadSafeQueue.h        
 //  Date:               3/19/2021
 //  Author:             Proshyn Nazarii
 //  Description:        thread-safe structure <queue> with 
@@ -22,7 +22,6 @@ public:
 
 	//! \brief                 Tread safe insert into the queue
 	//! \param [in] funct      New item for push 
-	//! \return 
 	void push(std::function<void()> funct);
 
 	//! \brief                 Delete first function
