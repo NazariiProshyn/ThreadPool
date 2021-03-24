@@ -14,7 +14,7 @@
 #include <queue>
 #include <functional>
 
-class ThreadSafeQueue
+class ThreadSafeQueue final
 {
 public:
 
@@ -25,8 +25,8 @@ public:
 	//! \return 
 	void push(std::function<void()> funct);
 
-	//! \brief                 Thread safe delete first 
-	//!                        element from the queue 
+	//! \brief                 Delete first function
+	//!                        from the queue and return it
 	//! \return                First function in the queue
 	std::function<void()> pop();
 
@@ -49,4 +49,3 @@ private:
 	// Notifies that an item has been added to the queue
 	std::condition_variable condVar;
 };
-

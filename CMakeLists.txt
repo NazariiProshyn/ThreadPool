@@ -3,4 +3,4 @@ project(ThreadPool)
 
 set(CMAKE_CXX_STANDART 17)
 
-add_executable(threadPool main.cpp threadsafeQueue.h threadsafeQueue.cpp)
+add_executable(threadPool main.cpp threadSafeQueue.h threadSafeQueue.cpp)
