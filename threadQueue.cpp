@@ -5,14 +5,14 @@ void ThreadSafeQueue::push(std::function<void()> funct)
 {
 	std::lock_guard<std::mutex> lock(mut);
 	dataQueue.push(std::move(funct));
-	dataCondition.notify_one();
+	condVar.notify_one();
 }
 
 
 std::function<void()> ThreadSafeQueue::pop()
 {
 	std::unique_lock<std::mutex> lock(mut);
-	dataCondition.wait(lock, [this] {return !dataQueue.empty(); });
+	condVar.wait(lock, [this] {return !dataQueue.empty(); });
 
 	std::function<void()> value = std::move(dataQueue.front());
 	dataQueue.pop();
