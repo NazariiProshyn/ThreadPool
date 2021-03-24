@@ -20,14 +20,13 @@ public:
 
 	ThreadQueue() = default;
 
-	//! \brief                 Inserts a new element at the end of the queue
-	//!                        sync access to the queue, prevent data race
+	//! \brief                 Tread safe insert into the queue
 	//! \param [in] funct      New item for push 
 	//! \return 
 	void push(std::function<void()> funct);
 
-	//! \brief                 Delete first element in the queue 
-	//!                        sync access to the queue, prevent data race
+	//! \brief                 Thread safe delete first 
+	//!                        element from the queue 
 	//! \return                First function in the queue
 	std::function<void()> pop();
 
