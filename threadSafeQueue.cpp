@@ -8,7 +8,6 @@ void ThreadSafeQueue::push(std::function<void()> funct)
 	condVar.notify_one();
 }
 
-
 std::function<void()> ThreadSafeQueue::pop()
 {
 	std::unique_lock<std::mutex> lock(mut);
@@ -18,7 +17,6 @@ std::function<void()> ThreadSafeQueue::pop()
 	dataQueue.pop();
 	return value;
 }
-
 
 size_t ThreadSafeQueue::size() const
 {

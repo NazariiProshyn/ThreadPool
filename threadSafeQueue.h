@@ -1,18 +1,20 @@
 #pragma once
 
-//  ********************************************************
-//  File Name:          threadSafeQueue.h        
-//  Date:               3/19/2021
-//  Author:             Proshyn Nazarii
-//  Description:        thread-safe structure <queue> with 
-//                      the ability to simultaneously write
-//                      from multiple threads
-//  ********************************************************
+/**
+ * @file      threadSafeQueue.h
+ *
+ * @brief     Thread-safe structure <queue> 
+ *
+ * @author    Proshyn Nazarii
+ * Contact:   nazariyproshyn@gmail.com
+ *
+ */
 
 #include <mutex>
 #include <condition_variable>
 #include <queue>
 #include <functional>
+
 
 class ThreadSafeQueue final
 {
@@ -20,13 +22,17 @@ public:
 
 	ThreadSafeQueue() = default;
 
+	//not copiable
+	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
+	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
+
 	//! \brief                 Tread safe insert into the queue
 	//! \param [in] funct      New item for push 
 	void push(std::function<void()> funct);
 
-	//! \brief                 Delete first function
-	//!                        from the queue and return it
-	//! \return                First function in the queue
+	//! \brief                 Delete first item from
+	//!                        the queue and return it
+	//! \return                First item in the queue
 	std::function<void()> pop();
 
 	//! \brief                 Returns the number of 
@@ -34,7 +40,6 @@ public:
 	//! \return                The number of 
 	//!                        elements in the queue.
 	size_t size() const;
-
 
 private:
 	
