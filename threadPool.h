@@ -1,14 +1,12 @@
 #pragma once
 
-/**
- * @file      threadPool.h
- *
- * @brief     simple example of Thread Pool
- *
- * @author    Proshyn Nazarii
- * Contact:   nazariyproshyn@gmail.com
- *
- */
+//	********************************************************
+//	File Name:          threadPoll.h        
+//	Date:               3/19/2021
+//	Author:             Proshyn Nazarii
+//	Description:        simple example of Thread Pool
+//	********************************************************
+
 
 #include <vector>
 #include <functional> 
@@ -23,6 +21,7 @@ class ThreadPool
 public:
 	//! \brief       Determines the possible number 
 	//!              of threads and creates them
+	//! \return 
 	ThreadPool(const size_t thread_count);
 
 	~ThreadPool();
@@ -32,7 +31,8 @@ public:
 	ThreadPool& operator=(const ThreadPool&) = delete;
 
 	//! \brief                 Add function to the execution queue  
-	//! \param [in] funct      New item for push         
+	//! \param [in] funct      Function that is added to the execution queue
+	//! \return                   
 	void submit(const std::function<void()> funct);
 
 private:
@@ -43,7 +43,7 @@ private:
 	std::atomic_bool run{true};
 
 	//Synchronized access to the task queue
-	ThreadSafeQueue workQueue;
+	std::queue<std::function<void()>> workQueue;
 
 	void workThread();
 };

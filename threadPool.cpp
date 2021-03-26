@@ -23,7 +23,9 @@ ThreadPool::ThreadPool(const size_t thread_count)
 }
 
 ThreadPool::~ThreadPool()
-{	
+{
+	while (workQueue.size() > 0) {}
+	run = false;
 	for (std::vector<std::thread>::iterator iter = threads.begin(); iter < threads.end(); ++iter)
 	{
 		if ((*iter).joinable())
@@ -31,7 +33,6 @@ ThreadPool::~ThreadPool()
 			(*iter).join();
 		}
 	}
-	run = false;
 }
 
 void ThreadPool::submit(const std::function<void()> funct)
@@ -43,7 +44,8 @@ void ThreadPool::workThread()
 {
 	while (run)
 	{
-		std::function<void()> task = workQueue.pop();
+		std::function<void()> task = workQueue.front();
+		workQueue.pop();
 		task();
 	}
 }
