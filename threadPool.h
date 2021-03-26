@@ -23,7 +23,6 @@ public:
 	//!              of threads and creates them
 	//! \return 
 	ThreadPool(const size_t thread_count);
-
 	~ThreadPool();
 
 	//Thread not copiable
