@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iterator>
 #include "threadPool.h"
 
 
@@ -23,13 +22,15 @@ ThreadPool::ThreadPool(const size_t thread_count)
 		{
 			threads.pop_back();
 		}
-
+		
 		throw;
 	}
 }
 
 ThreadPool::~ThreadPool()
-{	
+{
+	while (workQueue.size() > 0) {}
+	run = false;
 	for (auto &iter : threads)
 	{
 		if (iter.joinable())
@@ -37,7 +38,6 @@ ThreadPool::~ThreadPool()
 			iter.join();
 		}
 	}
-	run = false;
 }
 
 void ThreadPool::submit(const std::function<void()> funct)
