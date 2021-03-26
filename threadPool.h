@@ -36,8 +36,8 @@ public:
     void submit(const std::function<void()> funct);
 
 private:
-	//Vector of working threads
-	std::vector<std::thread> threads;
+    //Vector of working threads
+    std::vector<std::thread> threads;
 
     //Flag that indicate the
     //possibility of obtaining a task
