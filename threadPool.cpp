@@ -17,12 +17,10 @@ ThreadPool::ThreadPool(const size_t thread_count)
 	{
 		run = false;
 		std::cout << ex.what() << std::endl;
-
 		while(threads.size()>0)
 		{
 			threads.pop_back();
 		}
-		
 		throw;
 	}
 }
