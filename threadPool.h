@@ -10,13 +10,13 @@
  *
  */
 
-
 #include <vector>
 #include <functional> 
 #include <thread>
 #include <atomic>
 
 #include "threadSafeQueue.h"
+
 
 class ThreadPool
 {
