@@ -1,17 +1,19 @@
 #pragma once
 
-//	********************************************************
-//	File Name:          threadPoll.h        
-//	Date:               3/19/2021
-//	Author:             Proshyn Nazarii
-//	Description:        simple example of Thread Pool
-//	********************************************************
+/**
+ * @file      threadPool.h
+ *
+ * @brief     simple example of Thread Pool
+ *
+ * @author    Proshyn Nazarii
+ * Contact:   nazariyproshyn@gmail.com
+ *
+ */
 
 
 #include <vector>
 #include <functional> 
 #include <thread>
-#include <queue>
 #include <atomic>
 
 #include "threadSafeQueue.h"
@@ -19,9 +21,8 @@
 class ThreadPool
 {
 public:
-	//! \brief       Determines the possible number 
-	//!              of threads and creates them
-	//! \return 
+	//! \brief                        Creates the specified number of threads         
+	//! \param [in] thread_count      Number of threads to be created
 	ThreadPool(const size_t thread_count);
 	~ThreadPool();
 
@@ -38,11 +39,12 @@ private:
 	//Vector of working threads
 	std::vector<std::thread> threads;
 
-	//Indicates the possibility threads to work
+	//Flag that indicate the
+	//possibility of obtaining a task
 	std::atomic_bool run{true};
 
-	//Synchronized access to the task queue
-	std::queue<std::function<void()>> workQueue;
+	//Thread-safe queue of tasks
+	ThreadSafeQueue workQueue;
 
 	void workThread();
 };
