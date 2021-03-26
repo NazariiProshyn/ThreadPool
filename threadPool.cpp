@@ -18,17 +18,23 @@ ThreadPool::ThreadPool(const size_t thread_count)
 	{
 		run = false;
 		std::cout << ex.what() << std::endl;
+
+		while(threads.size()>0)
+		{
+			threads.pop_back();
+		}
+
 		throw;
 	}
 }
 
 ThreadPool::~ThreadPool()
 {	
-	for (std::vector<std::thread>::iterator iter = threads.begin(); iter < threads.end(); ++iter)
+	for (auto &iter : threads)
 	{
-		if ((*iter).joinable())
+		if (iter.joinable())
 		{
-			(*iter).join();
+			iter.join();
 		}
 	}
 	run = false;
