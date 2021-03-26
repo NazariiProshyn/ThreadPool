@@ -46,5 +46,6 @@ private:
 	//Thread-safe queue of tasks
 	ThreadSafeQueue workQueue;
 
+   //! \brief        Runs functions from the queue
 	void workThread();
 };
