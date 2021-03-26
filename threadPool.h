@@ -43,7 +43,7 @@ private:
 	std::atomic_bool run{true};
 
 	//Synchronized access to the task queue
-	std::queue<std::function<void()>> workQueue;
+	ThreadSafeQueue workQueue;
 
 	void workThread();
 };
