@@ -53,7 +53,7 @@ public:
 private:
 	
 	// Sync access to the queue,
-	// prevents data race
+	// Prevents data race
 	mutable std::mutex mut;
 
 	// Queue of functions

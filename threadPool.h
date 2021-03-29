@@ -29,7 +29,7 @@ public:
     ThreadPool(const size_t thread_count);
     ~ThreadPool();
 
-    //Thread not copiable
+    // Thread not copiable
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
 
@@ -38,7 +38,7 @@ public:
      * 
      * @param funct         Function that is added to the execution queue
      */
-    void submit(const std::function<void()> funct);
+    void submit(std::function<void()> funct);
 
 private:
 
@@ -52,16 +52,16 @@ private:
      * @brief stops all joinable threads
      *
      */
-    void stopvector();
+    void stopThreads();
 
 private:
-    //Vector of working threads
+    // Vector of working threads
     std::vector<std::thread> threads;
 
-    //Flag that indicate the
-    //possibility of obtaining a task
+    // Flag that indicate the
+    // Possibility of obtaining a task
     std::atomic_bool run{true};
 
-    //Thread-safe queue of tasks
+    // Thread-safe queue of tasks
     ThreadSafeQueue workQueue;
 };

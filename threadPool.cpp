@@ -17,20 +17,22 @@ ThreadPool::ThreadPool(const size_t thread_count)
 	catch (const std::exception& ex)
 	{
 		std::cout << ex.what() << std::endl;
-		stopvector();
+		stopThreads();
 		throw ex;
 	}
 }
 
 ThreadPool::~ThreadPool()
 {
-    while(workQueue.size()>0){}
-    stopvector();
+	//we need this loop to ensure 
+	//that all functions are performed
+    while( workQueue.size()>0 ) {}
+    stopThreads();
 }
 
-void ThreadPool::submit(const std::function<void()> funct)
+void ThreadPool::submit(std::function<void()> funct)
 {
-	workQueue.push(funct);
+	workQueue.push(std::move(funct));
 }
 
 void ThreadPool::workThread()
@@ -42,7 +44,7 @@ void ThreadPool::workThread()
 	}
 }
 
-void ThreadPool::stopvector()
+void ThreadPool::stopThreads()
 {
 	run = false;
 	for (auto& iter : threads)
