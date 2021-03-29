@@ -26,19 +26,28 @@ public:
 	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
 	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 
-	//! \brief                 Tread safe insert into the queue
-	//! \param [in] funct      New item for push 
+	/**
+	 * @brief         Tread safe insert into the queue
+	 * 
+	 * @param funct   New item for push 
+	 */
 	void push(std::function<void()> funct);
 
-	//! \brief                 Delete first item from
-	//!                        the queue and return it
-	//! \return                First item in the queue
+	/**
+	 * @brief              Delete first item from
+	 *                     the queue and return it
+	 * 
+	 * @return            First item in the queue
+	 */
 	std::function<void()> pop();
 
-	//! \brief                 Returns the number of 
-	//!                        elements in the queue. 
-	//! \return                The number of 
-	//!                        elements in the queue.
+	/**
+	 * @brief             Returns the number of 
+	 *                    elements in the queue. 
+	 * 
+	 * @return            The number of elements 
+	 *                    in the queue.
+	 */
 	size_t size() const;
 
 private:

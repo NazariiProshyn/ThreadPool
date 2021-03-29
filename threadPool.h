@@ -21,8 +21,11 @@
 class ThreadPool
 {
 public:
-    //! \brief                        Creates the specified number of threads         
-    //! \param [in] thread_count      Number of threads to be created
+    /**
+     * @brief                  Creates the specified number of threads  
+     * 
+     * @param thread_count     Number of threads to be created
+     */
     ThreadPool(const size_t thread_count);
     ~ThreadPool();
 
@@ -30,10 +33,26 @@ public:
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
 
-    //! \brief                 Add function to the execution queue  
-    //! \param [in] funct      Function that is added to the execution queue
-    //! \return                   
+    /**
+     * @brief               Add function to the execution queue 
+     * 
+     * @param funct         Function that is added to the execution queue
+     */
     void submit(const std::function<void()> funct);
+
+private:
+
+    /**
+     * @brief       Runs functions from the queue
+     * 
+     */
+    void workThread();
+
+    /**
+     * @brief stops all joinable threads
+     *
+     */
+    void stopvector();
 
 private:
     //Vector of working threads
@@ -45,7 +64,4 @@ private:
 
     //Thread-safe queue of tasks
     ThreadSafeQueue workQueue;
-
-    //! \brief        Runs functions from the queue
-    void workThread();
 };

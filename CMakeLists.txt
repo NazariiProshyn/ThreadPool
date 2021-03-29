@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDART 17)
 
 find_package( Threads )
 
-add_compile_options(-Wall -Wpedantic -Werror)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(/WX /W3 -D_WIN32_WINNT=0x0501)
+else()
+    add_compile_options(-g2 -Werror -Wall -Wpedantic -Weffc++)
+endif()
 
 add_executable(threadPool main.cpp threadSafeQueue.h threadSafeQueue.cpp threadPool.h threadPool.cpp)
 
