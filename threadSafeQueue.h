@@ -27,15 +27,15 @@ public:
 	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 
 	/**
-	 * @brief         Tread safe insert into the queue
+	 * @brief             Tread safe insert into the queue
 	 * 
-	 * @param funct   New item for push 
+	 * @param funct       New item for push 
 	 */
 	void push(std::function<void()> funct);
 
 	/**
-	 * @brief              Delete first item from
-	 *                     the queue and return it
+	 * @brief             Delete first item from
+	 *                    the queue and return it
 	 * 
 	 * @return            First item in the queue
 	 */
