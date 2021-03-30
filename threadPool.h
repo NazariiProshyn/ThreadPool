@@ -29,7 +29,8 @@ public:
     ThreadPool(const size_t thread_count);
     ~ThreadPool();
 
-    // Thread not copiable
+    // ThreadPoool is not copiable
+    // ThreadPoool is not movable
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
 
@@ -46,7 +47,7 @@ private:
      * @brief       Runs functions from the queue
      * 
      */
-    void workThread();
+    void workingThreads();
 
     /**
      * @brief stops all joinable threads

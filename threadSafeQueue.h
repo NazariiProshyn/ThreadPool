@@ -22,7 +22,8 @@ public:
 
 	ThreadSafeQueue() = default;
 
-	//not copyable
+	// ThreadSafeQueue is not copyable
+	// ThreadSafeQueue is not movable
 	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
 	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 

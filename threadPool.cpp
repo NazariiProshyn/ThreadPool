@@ -1,3 +1,14 @@
+/**
+ * @file      threadPool.cpp
+ *
+ * @brief     Simple realization of Thread Pool,
+ *            include adding new items for execution
+ *
+ * @author    Proshyn Nazarii
+ * Contact:   nazariyproshyn@gmail.com
+ *
+ */
+
 #include <iostream>
 #include "threadPool.h"
 
@@ -5,13 +16,12 @@
 ThreadPool::ThreadPool(const size_t thread_count)
 {
 	threads.reserve(thread_count);
-	std::exception ex;
 	try
 	{
 		for (size_t i = 0; i < thread_count; i++)
 		{
 			threads.push_back(
-				std::thread(&ThreadPool::workThread, this));
+				std::thread(&ThreadPool::workingThreads, this));
 		}
 	}
 	catch (const std::exception& ex)
@@ -24,8 +34,8 @@ ThreadPool::ThreadPool(const size_t thread_count)
 
 ThreadPool::~ThreadPool()
 {
-	//we need this loop to ensure 
-	//that all functions are performed
+	// We need this loop to ensure 
+	// that all functions are performed
     while( workQueue.size()>0 ) {}
     stopThreads();
 }
@@ -35,7 +45,7 @@ void ThreadPool::submit(std::function<void()> funct)
 	workQueue.push(std::move(funct));
 }
 
-void ThreadPool::workThread()
+void ThreadPool::workingThreads()
 {
 	while (run)
 	{
