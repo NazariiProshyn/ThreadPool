@@ -20,8 +20,8 @@
 /**
  * @class        ThreadPool
  * 
- * @brief        Class for achieving concurrency
- *               of execution different tasks.
+ * @brief        The thread pool pattern 
+ *               implementation 
  *
  */
 class ThreadPool

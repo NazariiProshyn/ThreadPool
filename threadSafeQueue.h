@@ -18,8 +18,8 @@
 /**
  * @class        ThreadPool
  * 
- * @brief        Class which implements work
- *               of thread-safe structure <queue>
+ * @brief        Implements work of 
+ *               thread-safe structure <queue>
  *
  */
 class ThreadSafeQueue final
