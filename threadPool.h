@@ -31,10 +31,12 @@ public:
 
     // ThreadPoool is not copyable
     // ThreadPoool is not movable
-    ThreadPool(const ThreadPool&) = delete;
-    ThreadPool& operator=(const ThreadPool&) = delete;
-    ThreadPool& operator=(ThreadPool&&) = delete;
     ThreadPool(ThreadPool&&) = delete;
+    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool& operator=(ThreadPool&&) = delete;
+    ThreadPool& operator=(const ThreadPool&) = delete;
+    
+    
 
     /**
      * @brief               Add function to the execution queue 

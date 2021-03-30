@@ -24,10 +24,12 @@ public:
 
 	// ThreadSafeQueue is not copyable
 	// ThreadSafeQueue is not movable
-	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
-	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
-	ThreadSafeQueue& operator=(ThreadSafeQueue&&) = delete;
 	ThreadSafeQueue(ThreadSafeQueue&&) = delete;
+	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
+	ThreadSafeQueue& operator=(ThreadSafeQueue&&) = delete;
+	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
+	
+	
 
 	/**
 	 * @brief             Tread safe insert into the queue
