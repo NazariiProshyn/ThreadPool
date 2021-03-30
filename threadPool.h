@@ -29,7 +29,7 @@ public:
     ThreadPool(const size_t thread_count);
     ~ThreadPool();
 
-    // ThreadPoool is not copiable
+    // ThreadPoool is not copyable
     // ThreadPoool is not movable
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
