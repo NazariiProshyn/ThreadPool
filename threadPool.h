@@ -46,13 +46,13 @@ public:
 private:
 
     /**
-     * @brief       Runs functions from the queue
+     * @brief       Executes tasks from the task queue
      * 
      */
     void executeTasks();
 
     /**
-     * @brief stops all joinable threads
+     * @brief       Stops all joinable threads
      *
      */
     void stopThreads();

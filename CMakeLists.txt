@@ -7,6 +7,8 @@ find_package( Threads )
 
 # We define WIN32_WINNT to specify the minimum 
 # operating system version my code supports
+# we need it to compile in Windows
+# 0x0501 - Windows XP version constant
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/WX /W3 -D_WIN32_WINNT=0x0501)
 else()
