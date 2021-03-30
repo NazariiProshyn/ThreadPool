@@ -16,7 +16,7 @@
 #include <functional>
 
 /**
- * @class        ThreadPool
+ * @class        ThreadSafeQueue
  * 
  * @brief        Implements work of 
  *               thread-safe structure <queue>
