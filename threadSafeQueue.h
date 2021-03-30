@@ -15,7 +15,13 @@
 #include <queue>
 #include <functional>
 
-
+/**
+ * @class        ThreadPool
+ * 
+ * @brief        Class which implements work
+ *               of thread-safe structure <queue>
+ *
+ */
 class ThreadSafeQueue final
 {
 public:

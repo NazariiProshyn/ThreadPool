@@ -17,7 +17,13 @@
 
 #include "threadSafeQueue.h"
 
-
+/**
+ * @class        ThreadPool
+ * 
+ * @brief        Class for achieving concurrency
+ *               of execution different tasks.
+ *
+ */
 class ThreadPool
 {
 public:
