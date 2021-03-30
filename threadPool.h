@@ -18,10 +18,10 @@
 #include "threadSafeQueue.h"
 
 /**
- * @class        ThreadPool
+ * @class     ThreadPool
  * 
- * @brief        The thread pool pattern 
- *               implementation 
+ * @brief     The thread pool pattern 
+ *            implementation 
  *
  */
 class ThreadPool
@@ -46,22 +46,22 @@ public:
     ThreadPool& operator=(ThreadPool&&) = delete;
     
     /**
-     * @brief               Add function to the execution queue 
+     * @brief           Add function to the execution queue 
      * 
-     * @param funct         Function that is added to the execution queue
+     * @param funct     Function that is added to the execution queue
      */
     void submit(std::function<void()> funct);
 
 private:
 
     /**
-     * @brief       Executes tasks from the task queue
+     * @brief     Executes tasks from the task queue
      * 
      */
     void executeTasks();
 
     /**
-     * @brief       Stops all joinable threads
+     * @brief     Stops all joinable threads
      *
      */
     void stopThreads();

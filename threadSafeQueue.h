@@ -16,10 +16,10 @@
 #include <functional>
 
 /**
- * @class        ThreadSafeQueue
+ * @class     ThreadSafeQueue
  * 
- * @brief        Implements work of 
- *               thread-safe structure <queue>
+ * @brief     A wrapper of std::queue<std::function<void()>> 
+ *            that provides thread safe operations
  *
  */
 class ThreadSafeQueue final
@@ -28,49 +28,49 @@ public:
 
 	ThreadSafeQueue() = default;
 
-	// ThreadSafeQueue is not copyable
-	// ThreadSafeQueue is not movable
-	ThreadSafeQueue(const ThreadSafeQueue&) = delete;
+    // ThreadSafeQueue is not copyable
+    // ThreadSafeQueue is not movable
+    ThreadSafeQueue(const ThreadSafeQueue&) = delete;
 
-	ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
+    ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 
-	ThreadSafeQueue(ThreadSafeQueue&&) = delete;
+    ThreadSafeQueue(ThreadSafeQueue&&) = delete;
 
-	ThreadSafeQueue& operator=(ThreadSafeQueue&&) = delete;
+    ThreadSafeQueue& operator=(ThreadSafeQueue&&) = delete;
 
-	/**
-	 * @brief             Tread safe insert into the queue
-	 * 
-	 * @param funct       New item for push 
-	 */
+    /**
+     * @brief           Tread safe insert into the queue
+     * 
+     * @param funct     New item for push 
+     */
 	void push(std::function<void()> funct);
 
-	/**
-	 * @brief             Delete first item from
-	 *                    the queue and return it
-	 * 
-	 * @return            First item in the queue
-	 */
+    /**
+     * @brief     Delete first item from
+     *            the queue and return it
+     * 
+     * @return    First item in the queue
+     */
 	std::function<void()> pop();
 
-	/**
-	 * @brief             Returns the number of 
-	 *                    elements in the queue. 
-	 * 
-	 * @return            The number of elements 
-	 *                    in the queue.
-	 */
-	size_t size() const;
+    /**
+     * @brief             Returns the number of 
+     *                    elements in the queue. 
+     * 
+     * @return            The number of elements 
+     *                    in the queue.
+     */
+    size_t size() const;
 
 private:
 	
-	// Sync access to the queue,
-	// Prevents data race
-	mutable std::mutex mut;
+    // Sync access to the queue,
+    // Prevents data race
+    mutable std::mutex mut;
 
-	// Queue of functions
-	std::queue<std::function<void()>> dataQueue;
+    // Queue of functions
+    std::queue<std::function<void()>> dataQueue;
 
-	// Notifies that an item has been added to the queue
-	std::condition_variable condVar;
+    // Notifies that an item has been added to the queue
+    std::condition_variable condVar;
 };
