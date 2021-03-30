@@ -33,6 +33,8 @@ public:
     // ThreadPoool is not movable
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
+    ThreadPool& operator=(ThreadPool&&) = delete;
+    ThreadPool(ThreadPool&&) = delete;
 
     /**
      * @brief               Add function to the execution queue 
@@ -47,7 +49,7 @@ private:
      * @brief       Runs functions from the queue
      * 
      */
-    void workingThreads();
+    void executeTasks();
 
     /**
      * @brief stops all joinable threads
