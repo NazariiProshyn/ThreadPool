@@ -60,7 +60,7 @@ private:
     std::vector<std::thread> threads;
 
     // Flag that indicate the
-    // Possibility of obtaining a task
+    // possibility of obtaining a task
     std::atomic_bool run{true};
 
     // Thread-safe queue of tasks
