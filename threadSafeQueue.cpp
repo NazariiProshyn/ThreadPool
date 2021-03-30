@@ -1,3 +1,14 @@
+/**
+ * @file      threadSafeQueue.cpp
+ *
+ * @brief     Realization of Thread-safe
+ *            structure <queue> 
+ *
+ * @author    Proshyn Nazarii
+ * Contact:   nazariyproshyn@gmail.com
+ *
+ */
+
 #include "threadSafeQueue.h"
 
 
